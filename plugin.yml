@@ -18,8 +18,8 @@ permissions:
   tokensapi.cmd.toptoken:
     description: Allows the user to see the top balances.
     default: true
-  tokensapi.cmd.settoken:
-    description: Allows the op-user to set another user balance.
+  tokensapi.cmd.removetoken:
+    description: Allows the op-user to romove another user balance.
     default: op
   tokensapi.cmd.addtoken:
     description: Allows the user to add money to another user balance.
