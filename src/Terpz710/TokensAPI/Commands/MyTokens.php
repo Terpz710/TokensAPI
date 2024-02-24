@@ -17,7 +17,7 @@ class MyTokens extends Command {
 
     public function __construct(Tokens $plugin) {
         parent::__construct("mytokens", "View your current token balance", "/mytokens");
-        $this->setPermission("tokensapi.cmd.mytokens");
+        $this->setPermission("tokensapi.cmd.mytoken");
         $this->plugin = $plugin;
     }
 
