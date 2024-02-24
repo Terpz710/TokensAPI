@@ -26,7 +26,7 @@ class TopTokens extends Command {
         }
 
         $tokenAPI = $this->plugin->getTokenAPI();
-        $topPlayers = $this->getTopPlayers($tokenAPI);
+        $topPlayers = $this->getTopPlayers($this->plugin); // Pass $this->plugin
 
         $sender->sendMessage("--- Top Players with Highest Token Balances ---");
         $rank = 1;
@@ -41,8 +41,9 @@ class TopTokens extends Command {
     private function getTopPlayers(Tokens $plugin): array {
         $playerTokens = [];
         $onlinePlayers = $plugin->getServer()->getOnlinePlayers();
+        $tokenAPI = $plugin->getTokenAPI(); // Get TokenAPI instance from Tokens
         foreach ($onlinePlayers as $player) {
-            $playerTokens[$player->getName()] = $plugin->getTokenAPI()->getPlayerToken($player);
+            $playerTokens[$player->getName()] = $tokenAPI->getPlayerToken($player); // Use TokenAPI instance
         }
         arsort($playerTokens);
         return array_slice($playerTokens, 0, 10, true);
