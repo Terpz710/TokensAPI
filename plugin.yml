@@ -1,0 +1,29 @@
+name: TokensAPI
+version: 1.0.0
+author: Terpz710
+api: 5.0.0
+main: Terpz710\TokensAPI\Tokens
+description: Adds tokens support
+
+permissions:
+  tokensapi.cmd.paytoken:
+    description: Allows the user to pay another user.
+    default: true
+  tokensapi.cmd.mytoken:
+    description: Allows the user to see their balance.
+    default: true
+  tokensapi.cmd.seetoken:
+    description: Allows the user to see another users balance.
+    default: true
+  tokensapi.cmd.toptoken:
+    description: Allows the user to see the top balances.
+    default: true
+  tokensapi.cmd.settoken:
+    description: Allows the op-user to set another user balance.
+    default: op
+  tokensapi.cmd.addtoken:
+    description: Allows the user to add money to another user balance.
+    default: op
+    tokensapi.cmd.settoken:
+    description: Allows the user to add money to another user balance.
+    default: op
