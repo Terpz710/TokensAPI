@@ -24,6 +24,6 @@ permissions:
   tokensapi.cmd.addtoken:
     description: Allows the user to add money to another user balance.
     default: op
-    tokensapi.cmd.settoken:
+  tokensapi.cmd.settoken:
     description: Allows the user to add money to another user balance.
     default: op
