@@ -16,7 +16,7 @@ class TopTokens extends Command {
 
     public function __construct(Tokens $plugin) {
         parent::__construct("toptokens", "Display the top players with the highest token balances", "/toptokens");
-        $this->setPermission("tokens.cmd.toptokens");
+        $this->setPermission("tokens.cmd.toptoken");
         $this->plugin = $plugin;
     }
 
