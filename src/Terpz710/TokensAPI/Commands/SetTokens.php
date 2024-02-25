@@ -44,14 +44,14 @@ class SetTokens extends Command {
 
         $amount = (int) $args[1];
         if ($amount < 0) {
-            $sender->sendMessage("Please enter a valid amount greater than or equal to 0!");
+            $sender->sendMessage("Please enter a valid amount greater than or equal to §c0§f!");
             return false;
         }
 
         $tokenAPI = $this->plugin->getTokenAPI();
         $tokenAPI->setToken($targetPlayer, $amount);
 
-        $sender->sendMessage("Set " . $targetPlayer->getName() . "'s token balance to $amount!");
+        $sender->sendMessage("Set §e" . $targetPlayer->getName() . "'s token §fbalance to §e{$amount}!");
 
         return true;
     }
