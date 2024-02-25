@@ -44,14 +44,14 @@ class AddTokens extends Command {
 
         $amount = (int) $args[1];
         if ($amount <= 0) {
-            $sender->sendMessage("Please enter a valid amount greater than 0!");
+            $sender->sendMessage("Please enter a valid amount greater than §c0§f!");
             return false;
         }
 
         $tokenAPI = $this->plugin->getTokenAPI();
         $tokenAPI->addToken($targetPlayer, $amount);
 
-        $sender->sendMessage("$amount tokens have been added to " . $targetPlayer->getName() . "'s balance!");
+        $sender->sendMessage("§e{$amount} tokens§f have been added to §e" . $targetPlayer->getName() . "'s §fbalance!");
 
         return true;
     }
