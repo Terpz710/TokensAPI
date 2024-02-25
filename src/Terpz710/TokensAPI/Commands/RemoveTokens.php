@@ -51,7 +51,7 @@ class RemoveTokens extends Command {
         $tokenAPI = $this->plugin->getTokenAPI();
         $targetTokens = $tokenAPI->getPlayerToken($targetPlayer);
         if ($targetTokens < $amount) {
-            $sender->sendMessage("§e" . $targetPlayer->getname . "doesn't have enough §etokens§f!");
+            $sender->sendMessage("§e" . $targetPlayer->getName() . "doesn't have enough §etokens§f!");
             return false;
         }
 
