@@ -44,22 +44,22 @@ class PayTokens extends Command {
 
         $amount = (int) $args[1];
         if ($amount <= 0) {
-            $sender->sendMessage("Please enter a valid amount greater than 0!");
+            $sender->sendMessage("Please enter a valid amount greater than §c0§f!");
             return false;
         }
 
         $tokenAPI = $this->plugin->getTokenAPI();
         $senderTokens = $tokenAPI->getPlayerToken($sender);
         if ($senderTokens < $amount) {
-            $sender->sendMessage("You don't have enough tokens to complete this transaction!");
+            $sender->sendMessage("You don't have enough §etokens§f to complete this transaction!");
             return false;
         }
 
         $tokenAPI->removeToken($sender, $amount);
         $tokenAPI->addToken($targetPlayer, $amount);
 
-        $sender->sendMessage("You have paid $amount tokens to " . $targetPlayer->getName() . "!");
-        $targetPlayer->sendMessage("You have received $amount tokens from " . $sender->getName() . "!");
+        $sender->sendMessage("You have paid §e{$amount} tokens§f to §e" . $targetPlayer->getName() . "§f!");
+        $targetPlayer->sendMessage("You have received §e{$amount} tokens§f from §e" . $sender->getName() . "§f!");
 
         return true;
     }
