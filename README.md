@@ -32,9 +32,21 @@ starting_token_amount: 100
 
 # Open a pull request
 
+Make sure to make a fork before creating a pull request.
+
+Note I dont accept any pull request!
+
+I wont accept request IF the following change isnt major.
+
+Click below to open a pull request:
+
 [Click me](https://github.com/Terpz710/TokensAPI/pulls)
 
 # Open a bug report here
+
+I appreciate your help and support to make sure this project is bug/error free!
+
+Click below to sumbit a bug report:
 
 [Click me](https://github.com/Terpz710/TokensAPI/issues/new)
 
