@@ -40,7 +40,7 @@ class SeeTokens extends Command {
         $tokenAPI = $this->plugin->getTokenAPI();
         $tokens = $tokenAPI->getPlayerToken($targetPlayer);
 
-        $sender->sendMessage($targetPlayer->getName() . "'s token balance:§e $tokens");
+        $sender->sendMessage("§e" . $targetPlayer->getName() . "'s token balance:§e $tokens");
 
         return true;
     }
