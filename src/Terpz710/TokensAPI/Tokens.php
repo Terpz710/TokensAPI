@@ -39,16 +39,16 @@ class Tokens extends PluginBase implements Listener {
     }
 
     private function registerCommands() {
-		 $this->getServer()->getCommandMap()->registerAll("TokensAPI", [
-			 new PayTokens($this),
-			 new RemoveTokens($this),
-			 new AddTokens($this),
-			 new SeeTokens($this),
-			 new MyTokens($this),
-			 new TopTokens($this),
-			 new SetTokens($this)
-		 ]);
-	 }
+        $this->getServer()->getCommandMap()->registerAll("TokensAPI", [
+          new PayTokens($this),
+          new RemoveTokens($this),
+	  new AddTokens($this),
+	  new SeeTokens($this),
+	  new MyTokens($this),
+	  new TopTokens($this),
+	  new SetTokens($this)
+        ]);
+    }
 
     /**
      * Get the TokenAPI instance.
