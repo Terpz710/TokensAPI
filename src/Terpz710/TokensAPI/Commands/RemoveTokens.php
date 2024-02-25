@@ -44,20 +44,20 @@ class RemoveTokens extends Command {
 
         $amount = (int) $args[1];
         if ($amount <= 0) {
-            $sender->sendMessage("Please enter a valid amount greater than 0!");
+            $sender->sendMessage("Please enter a valid amount greater than §c0§f!");
             return false;
         }
 
         $tokenAPI = $this->plugin->getTokenAPI();
         $targetTokens = $tokenAPI->getPlayerToken($targetPlayer);
         if ($targetTokens < $amount) {
-            $sender->sendMessage("The target player doesn't have enough tokens!");
+            $sender->sendMessage("§e" . $targetPlayer->getname . "doesn't have enough §etokens§f!");
             return false;
         }
 
         $tokenAPI->removeToken($targetPlayer, $amount);
 
-        $sender->sendMessage("$amount tokens have been removed from " . $targetPlayer->getName() . "'s balance!");
+        $sender->sendMessage("§e{$amount}§f tokens have been removed from§e " . $targetPlayer->getName() . "'s §fbalance!");
 
         return true;
     }
