@@ -16,7 +16,7 @@ class SeeTokens extends Command {
     private $plugin;
 
     public function __construct(Tokens $plugin) {
-        parent::__construct("seetokens", "View the token balance of another player", "/seetokens <player>");
+        parent::__construct("seetoken", "View the token balance of another player", "/seetokens <player>");
         $this->setPermission("tokensapi.cmd.seetoken");
         $this->plugin = $plugin;
     }
