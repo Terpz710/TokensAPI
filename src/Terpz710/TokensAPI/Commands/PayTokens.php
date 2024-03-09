@@ -6,11 +6,13 @@ namespace Terpz710\TokensAPI\Commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
 use pocketmine\player\Player;
 
 use Terpz710\TokensAPI\Tokens;
 
-class PayTokens extends Command {
+class PayTokens extends Command implements PluginOwned {
 
     /** @var Tokens */
     private $plugin;
@@ -19,6 +21,10 @@ class PayTokens extends Command {
         parent::__construct("paytoken", "Pay tokens to another player", "/paytoken <player> <amount>");
         $this->setPermission("tokensapi.cmd.paytoken");
         $this->plugin = $plugin;
+    }
+
+    public function getOwningPlugin(): Plugin {
+        return $this->plugin;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
