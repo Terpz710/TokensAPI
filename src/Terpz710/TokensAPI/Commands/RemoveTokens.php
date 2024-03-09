@@ -6,11 +6,13 @@ namespace Terpz710\TokensAPI\Commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
 use pocketmine\player\Player;
 
 use Terpz710\TokensAPI\Tokens;
 
-class RemoveTokens extends Command {
+class RemoveTokens extends Command implements PluginOwned {
 
     /** @var Tokens */
     private $plugin;
@@ -19,6 +21,10 @@ class RemoveTokens extends Command {
         parent::__construct("removetoken", "Remove tokens from a player's balance", "/removetokens <player> <amount>");
         $this->setPermission("tokensapi.cmd.removetoken");
         $this->plugin = $plugin;
+    }
+
+    public function getOwningPlugin(): Plugin {
+        return $this->plugin;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
