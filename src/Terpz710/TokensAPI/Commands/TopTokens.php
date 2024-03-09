@@ -6,10 +6,12 @@ namespace Terpz710\TokensAPI\Commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
 
 use Terpz710\TokensAPI\Tokens;
 
-class TopTokens extends Command {
+class TopTokens extends Command implements PluginOwned{
 
     /** @var Tokens */
     private $plugin;
@@ -18,6 +20,10 @@ class TopTokens extends Command {
         parent::__construct("toptokens", "Display the top players with the highest token balances", "/toptokens");
         $this->setPermission("tokensapi.cmd.toptoken");
         $this->plugin = $plugin;
+    }
+
+    public function getOwningPlugin(): Plugin {
+        return $this->plugin;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
