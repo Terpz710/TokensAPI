@@ -6,11 +6,13 @@ namespace Terpz710\TokensAPI\Commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
 use pocketmine\player\Player;
 
 use Terpz710\TokensAPI\Tokens;
 
-class SeeTokens extends Command {
+class SeeTokens extends Command implements PluginOwned {
 
     /** @var Tokens */
     private $plugin;
@@ -19,6 +21,10 @@ class SeeTokens extends Command {
         parent::__construct("seetoken", "View the token balance of another player", "/seetokens <player>");
         $this->setPermission("tokensapi.cmd.seetoken");
         $this->plugin = $plugin;
+    }
+
+    public function getOwningPlugin(): Plugin {
+        return $this->plugin;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
