@@ -29,7 +29,7 @@ class Tokens extends PluginBase implements Listener {
         $this->tokenAPI = new TokenAPI($this);
     }
 
-    public function onPlayerJoin(PlayerJoinEvent $event): void {
+    public function onPlayerJoin(PlayerJoinEvent $event) {
         $player = $event->getPlayer();
         $playerName = $player->getName();
         if (!$this->tokenAPI->getPlayerToken($player)) {
