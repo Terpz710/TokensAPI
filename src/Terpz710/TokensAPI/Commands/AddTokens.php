@@ -7,7 +7,7 @@ namespace Terpz710\TokensAPI\Commands;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\Plugin;
-use pocketmine\plugin\PluginOwned
+use pocketmine\plugin\PluginOwned;
 use pocketmine\player\Player;
 
 use Terpz710\TokensAPI\Tokens;
