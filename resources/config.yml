@@ -1,4 +1,19 @@
-# Made by Terpz710 :p
+# Terpz710
 
-# Starting amount
-starting_token_amount: 100
+# Choose the storage type for player balances:
+# Options:
+# - "sqlite": Uses a SQLite database to store balances (default)
+# - "mysql": Uses a MySQL database to store balances
+# - "json": Uses a JSON file to store balances
+# - "yml": Uses a YAML file to store balances
+# - "txt": Uses a TXT file to store balances
+storage: "sqlite"
+
+# Starting amount for new player accounts
+starting-amount: 1000
+
+# MySQL Database Configuration
+mysql-host: 127.0.0.1         # Hostname or IP of your MySQL server
+mysql-user: "root"            # Username for MySQL
+mysql-password: ""            # Password for MySQL
+mysql-database: "TokensAPI"   # Database name for storing player balances
