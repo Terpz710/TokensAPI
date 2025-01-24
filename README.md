@@ -23,81 +23,90 @@ Easy to use API for developers ❤️
 
 # Config
 
-```
-# Made by Terpz710 :p
+```php
+# Terpz710
 
-# Starting amount
-starting_token_amount: 100
+# Choose the storage type for player balances:
+# Options:
+# - "sqlite": Uses a SQLite database to store balances (default)
+# - "mysql": Uses a MySQL database to store balances
+# - "json": Uses a JSON file to store balances
+# - "yml": Uses a YML file to store balances
+# - "txt": Uses a TXT file to store balances
+storage: "sqlite"
+
+# Starting amount for new player accounts
+starting-amount: 1000
+
+# MySQL Database Configuration
+mysql-host: 127.0.0.1         # Hostname or IP of your MySQL server
+mysql-user: "root"            # Username for MySQL
+mysql-password: ""            # Password for MySQL
+mysql-database: "TokensAPI"   # Database name for storing player balances
 ```
 
-# API💜
+# API for Developers ❤️
 
 **How to get the token instance**
-```
-There are 2 ways to retrieve it:
-use Terpz710\TokensAPI\Tokens;
+```php
+/** Import this class */
+use terpz710\tokensapi\TokensAPI;
 
-$api = Tokens::getInstance()->getTokenAPI();
-
-or
-
-use Terpz710\TokensAPI\API\TokenAPI;
-
-$api = TokenAPI::getInstance();
+$api = TokensAPI::getInstance();
 ```
 
 **How to retrieve a players token balance**
-```
+```php
 $player is an instance of Player::class
 
-$api = TokenAPI::getInstance();
+$api = TokensAPI::getInstance();
 
 $api->getTokenBalance($player);
 ```
 
 **How to add tokens to a player**
-```
+```php
 $player is an instance of Player::class
 
 $amount = 100;
 
-$api = TokenAPI::getInstance();
+$api = TokensAPI::getInstance();
 
-$api->addToken($player, $amount);
+$api->addTokens($player, $amount);
 
 or
 
-$api->addToken($player, 100);
+$api->addTokens($player, 100);
 ```
 
 **How to remove tokens from a player**
-```
+```php
 $player is an instance of Player::class
 
 $amount = 100;
 
-$api = TokenAPI::getInstance();
+$api = TokensAPI::getInstance();
 
-$api->removeToken($player, $amount);
+$api->removeTokens($player, $amount);
 
 or
 
-$api->removeToken($player, 100);
+$api->removeTokens($player, 100);
 ```
 
 **How to set a players token balance**
-```
+```php
 $player is an instance of Player::class
 
 $amount = 100;
 
-$api = TokenAPI::getInstance();
+$api = TokensAPI::getInstance();
 
-$api->setToken($player, $amount);
+$api->setTokens($player, $amount);
 
 or
 
-$api->setToken($player, 100);
+$api->setTokens($player, 100);
 ```
 
 # Open a pull request
@@ -122,7 +131,7 @@ Click below to sumbit a bug report:
 
 # TODO
 
-* Configurable messages 
-* MySQL and MySQL Lite
+* Configurable messages (completed)
+* MySQL and MySQL Lite (completed)
 
   Got any ideas? DM me via [discord](https://discord.gg/eQpvm8Zj) Ace873056
