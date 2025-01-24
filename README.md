@@ -10,6 +10,10 @@ This plugin is still under development so the plugin may seem unfinished! 🔨�
 
 Easy to use API for developers ❤️
 
+**TokensAPI** had a huge code rewrite on January 24, 2025
+
+***This rewrite introduced new features aswell as fixes/improvements. Configurable messages, added multiple storage types for storing token balances and rewrote 99% of the code.***
+
 # Commands
 | Command                                   | Description                                                                   | Permission                                    | Default    |
 |-------------------------------------------|-------------------------------------------------------------------------------|-----------------------------------------------|------------|
@@ -47,7 +51,7 @@ mysql-database: "TokensAPI"   # Database name for storing player balances
 
 # API for Developers ❤️
 
-**How to get the token instance**
+**How to get the token instance:**
 ```php
 /** Import this class */
 use terpz710\tokensapi\TokensAPI;
@@ -55,18 +59,24 @@ use terpz710\tokensapi\TokensAPI;
 $api = TokensAPI::getInstance();
 ```
 
-**How to retrieve a players token balance**
+**How to retrieve a players token balance:**
 ```php
-$player is an instance of Player::class
+$player can be either an instance of Player::class or PlayerName (e.g. Steve)
 
 $api = TokensAPI::getInstance();
 
 $api->getTokenBalance($player);
+
+or
+
+$name = "Steve";
+
+$api->getTokenBalance($name);
 ```
 
-**How to add tokens to a player**
+**How to add tokens to a player:**
 ```php
-$player is an instance of Player::class
+$player can be either an instance of Player::class or PlayerName (e.g. Steve)
 
 $amount = 100;
 
@@ -76,12 +86,16 @@ $api->addTokens($player, $amount);
 
 or
 
-$api->addTokens($player, 100);
+$name = "Steve";
+
+$amount = 100;
+
+$api->addTokens($name, $amount);
 ```
 
-**How to remove tokens from a player**
+**How to remove tokens from a player:**
 ```php
-$player is an instance of Player::class
+$player can be either an instance of Player::class or PlayerName (e.g. Steve)
 
 $amount = 100;
 
@@ -91,12 +105,16 @@ $api->removeTokens($player, $amount);
 
 or
 
-$api->removeTokens($player, 100);
+$name = "Steve";
+
+$amount = 100;
+
+$api->removeTokens($name, $amount);
 ```
 
-**How to set a players token balance**
+**How to set a players token balance:**
 ```php
-$player is an instance of Player::class
+$player can be either an instance of Player::class or PlayerName (e.g. Steve)
 
 $amount = 100;
 
@@ -106,7 +124,46 @@ $api->setTokens($player, $amount);
 
 or
 
-$api->setTokens($player, 100);
+$name = "Steve";
+
+$amount = 100;
+
+$api->setTokens($name, $amount);
+```
+
+**How to check if a player has a token balance before adding tokens:**
+```php
+$player can be either an instance of Player::class or PlayerName (e.g. Steve)
+
+$amount = 100;
+
+$api = TokensAPI::getInstance();
+
+/**
+ * Call this before attempting to add/remove/set tokens
+ * Take a look at AddTokensCommand.php for a refrence
+ */
+if (!$api->hasTokenBalance($player)) {
+    $player->sendMessage("Steve does not have a token balance");
+    }
+
+$api->setTokens($player, $amount);
+
+or
+
+$name = "Steve";
+
+$amount = 100;
+
+/**
+ * Call this before attempting to add/remove/set tokens
+ * Take a look at AddTokensCommand.php for a refrence
+ */
+if (!$api->hasTokenBalance($name)) {
+    $player->sendMessage($name . " does not have a token balance");
+    }
+
+$api->setTokens($name, $amount);
 ```
 
 # Open a pull request
