@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://github.com/Terpz710/TokensAPI"><img src="https://github.com/Terpz710/TokensAPI/blob/main/icon.png"></img></a><br>
+    <a href="https://github.com/Terpz710/TokensAPI"><img src="https://github.com/Terpz710/TokensAPI/blob/stable/icon.png"></img></a><br>
     <b>Tokens system for Pocketmine-MP</b>
 
 # Description
