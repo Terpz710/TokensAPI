@@ -188,6 +188,12 @@ Click below to sumbit a bug report:
 
 [Click me](https://github.com/Terpz710/TokensAPI/issues/new)
 
+# Addon
+
+This plugin supports ScoreHud!
+
+Link to addon: [TokensAPIScoreTag](https://github.com/Terpz710/TokensAPIScoreTag/tree/main)
+
 # TODO
 
 * Configurable messages (completed)
