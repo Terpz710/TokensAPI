@@ -1,0 +1,43 @@
+# Terpz710
+
+# Message affiché lorsqu'un utilisateur entre un nombre invalide (non positif) pour la quantité
+positive-amount-only: "&cLa quantité doit être un nombre positif!"
+
+# Message affiché lorsqu'on essaie d'accéder au solde d'un joueur, mais que ce joueur n'existe pas
+# {name} est remplacé par le nom du joueur
+player-does-not-have-balance: "&c{name}&f n'a pas de solde de jetons!"
+
+# Message affiché lorsque des jetons sont ajoutés avec succès au compte d'un joueur
+# {amount} est le nombre de jetons et {name} est le nom du joueur
+successfully-added-tokens: "Vous avez ajouté &e{amount} jetons&f au solde de &a{name}&f!"
+
+# Message affiché lorsqu'un joueur consulte son solde de jetons
+# {balance} est le solde actuel du joueur
+your-balance: "Votre solde: &e{balance} jetons"
+
+# Message affiché lorsqu'un joueur essaie de dépenser des jetons mais qu'il n'en a pas assez
+insufficient-tokens: "&cVous n'avez pas assez de jetons!"
+
+# Message affiché lorsqu'un joueur transfère des jetons avec succès à un autre joueur
+# {amount} est le nombre de jetons et {name} est le nom du destinataire
+successfully-paid-tokens: "Vous avez transféré &e{amount} jetons&f à &a{name}&f!"
+
+# Message affiché lorsqu'on essaie de retirer des jetons d'un joueur qui n'en a pas assez
+# {name} est remplacé par le nom du joueur
+not-enough-tokens: "&c{name}&f n'a pas assez de jetons pour effectuer cette action!"
+
+# Message affiché lorsque des jetons sont retirés avec succès du compte d'un joueur
+# {amount} est le nombre de jetons et {name} est le nom du joueur
+successfully-removed-tokens: "Vous avez retiré &e{amount} jetons&f du solde de &a{name}&f!"
+
+# Message affiché lorsqu'il est impossible de récupérer le solde de jetons d'un joueur
+# {name} est le nom du joueur
+could-not-retrieve-balance: "&cImpossible de récupérer le solde de jetons pour {name}!"
+
+# Message affiché lorsqu'on consulte le solde de jetons d'un autre joueur
+# {name} est le nom du joueur et {balance} est son solde actuel
+players-balance: "&a{name}&f a &e{balance} jetons"
+
+# Message affiché lorsqu'un joueur voit son solde de jetons défini avec succès à une certaine valeur
+# {amount} est le nouveau solde de jetons et {name} est le nom du joueur
+successfully-set-tokens: "Le solde de jetons de &a{name}&f a été défini sur &e{amount}&f!"

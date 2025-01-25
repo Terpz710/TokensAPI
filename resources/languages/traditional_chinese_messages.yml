@@ -1,0 +1,43 @@
+# Terpz710
+
+# 顯示當用戶輸入無效（非正數）金額時的消息
+positive-amount-only: "&c金額必須是正數！"
+
+# 顯示當嘗試訪問不存在的玩家的餘額時的消息
+# {name} 會被玩家的名字替代
+player-does-not-have-balance: "&c{name}&f 沒有令牌餘額。"
+
+# 顯示當成功將令牌添加到玩家賬戶時的消息
+# {amount} 是令牌的數量，{name} 是玩家的名字
+successfully-added-tokens: "成功將 &e{amount} 令牌&f 添加到 &a{name}&f 的令牌餘額中。"
+
+# 顯示當玩家查看自己的令牌餘額時的消息
+# {balance} 是玩家當前的令牌餘額
+your-balance: "你的餘額：&e{balance} 令牌"
+
+# 顯示當玩家嘗試消耗令牌但餘額不足時的消息
+insufficient-tokens: "&c你沒有足夠的令牌！"
+
+# 顯示當玩家成功將令牌轉移給其他玩家時的消息
+# {amount} 是令牌的數量，{name} 是收款人的名字
+successfully-paid-tokens: "成功將 &e{amount} 令牌&f 轉移到 &a{name}&f 的令牌餘額中。"
+
+# 顯示當嘗試從沒有足夠令牌的玩家處移除令牌時的消息
+# {name} 會被玩家的名字替代
+not-enough-tokens: "&c{name}&f 沒有足夠的令牌來移除！"
+
+# 顯示當成功從玩家賬戶中移除令牌時的消息
+# {amount} 是令牌的數量，{name} 是玩家的名字
+successfully-removed-tokens: "成功從 &a{name}&f 的令牌餘額中移除 &e{amount} 令牌。"
+
+# 顯示當無法檢索玩家的令牌餘額時的消息
+# {name} 是玩家的名字
+could-not-retrieve-balance: "&c無法檢索 {name} 的令牌餘額。"
+
+# 顯示當查看其他玩家的令牌餘額時的消息
+# {name} 是玩家的名字，{balance} 是他們當前的令牌餘額
+players-balance: "&a{name}&f 擁有 &e{balance} 令牌"
+
+# 顯示當成功將玩家的令牌餘額設置為指定金額時的消息
+# {amount} 是新的令牌餘額，{name} 是玩家的名字
+successfully-set-tokens: "成功將 &a{name}&f 的令牌餘額設置為 &e{amount}&f。"

@@ -1,0 +1,43 @@
+# Terpz710
+
+# Mensaje mostrado cuando un usuario ingresa un número inválido (no positivo) para la cantidad
+positive-amount-only: "&c¡La cantidad debe ser un número positivo!"
+
+# Mensaje mostrado al intentar acceder al saldo de un jugador, pero el jugador no existe
+# {name} se reemplaza con el nombre del jugador
+player-does-not-have-balance: "&c{name}&f no tiene un saldo de tokens!"
+
+# Mensaje mostrado cuando los tokens se añaden exitosamente a la cuenta de un jugador
+# {amount} es el número de tokens y {name} es el nombre del jugador
+successfully-added-tokens: "Se añadieron &e{amount} tokens&f al saldo de tokens de &a{name}&f!"
+
+# Mensaje mostrado cuando un jugador revisa su saldo de tokens
+# {balance} es el saldo actual de tokens del jugador
+your-balance: "Tu saldo: &e{balance} tokens"
+
+# Mensaje mostrado cuando un jugador intenta gastar tokens pero no tiene suficientes
+insufficient-tokens: "&c¡No tienes suficientes tokens!"
+
+# Mensaje mostrado cuando un jugador transfiere tokens exitosamente a otro jugador
+# {amount} es el número de tokens y {name} es el nombre del destinatario
+successfully-paid-tokens: "Le pagaste &e{amount} tokens&f al saldo de tokens de &a{name}&f!"
+
+# Mensaje mostrado al intentar remover tokens de un jugador que no tiene suficientes
+# {name} se reemplaza con el nombre del jugador
+not-enough-tokens: "&c{name}&f no tiene suficientes tokens para quitárselos!"
+
+# Mensaje mostrado cuando los tokens son eliminados exitosamente de la cuenta de un jugador
+# {amount} es el número de tokens y {name} es el nombre del jugador
+successfully-removed-tokens: "Se quitaron &e{amount} tokens&f del saldo de tokens de &a{name}&f!"
+
+# Mensaje mostrado cuando no se puede recuperar el saldo de tokens de un jugador
+# {name} es el nombre del jugador
+could-not-retrieve-balance: "&cNo se pudo recuperar el saldo de tokens de {name}!"
+
+# Mensaje mostrado al ver el saldo de tokens de otro jugador
+# {name} es el nombre del jugador y {balance} es su saldo actual de tokens
+players-balance: "&a{name}&f tiene &e{balance} tokens"
+
+# Mensaje mostrado cuando el saldo de tokens de un jugador se establece exitosamente a una cantidad específica
+# {amount} es el nuevo saldo de tokens y {name} es el nombre del jugador
+successfully-set-tokens: "Se actualizó el saldo de tokens de &a{name}&f a &e{amount}&f!"

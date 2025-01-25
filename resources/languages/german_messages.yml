@@ -1,0 +1,43 @@
+# Terpz710
+
+# Nachricht, die angezeigt wird, wenn ein Benutzer eine ungültige (nicht positive) Zahl für die Menge eingibt
+positive-amount-only: "&cDie Menge muss eine positive Zahl sein!"
+
+# Nachricht, die angezeigt wird, wenn versucht wird, auf das Guthaben eines Spielers zuzugreifen, der nicht existiert
+# {name} wird durch den Namen des Spielers ersetzt
+player-does-not-have-balance: "&c{name}&f hat kein Token-Guthaben"
+
+# Nachricht, die angezeigt wird, wenn einem Spieler erfolgreich Tokens hinzugefügt werden
+# {amount} ist die Anzahl der Tokens und {name} ist der Name des Spielers
+successfully-added-tokens: "Es wurden erfolgreich &e{amount} Tokens&f zum Guthaben von &a{name}&f hinzugefügt"
+
+# Nachricht, die angezeigt wird, wenn ein Spieler sein Token-Guthaben abfragt
+# {balance} ist das aktuelle Guthaben des Spielers
+your-balance: "Dein Guthaben: &e{balance} Tokens"
+
+# Nachricht, die angezeigt wird, wenn ein Spieler versucht, Tokens auszugeben, aber nicht genügend besitzt
+insufficient-tokens: "&cDu hast nicht genügend Tokens!"
+
+# Nachricht, die angezeigt wird, wenn ein Spieler erfolgreich Tokens an einen anderen Spieler überträgt
+# {amount} ist die Anzahl der Tokens und {name} ist der Name des Empfängers
+successfully-paid-tokens: "Du hast erfolgreich &e{amount} Tokens&f an &a{name}&f übertragen"
+
+# Nachricht, die angezeigt wird, wenn versucht wird, Tokens von einem Spieler zu entfernen, der nicht genügend hat
+# {name} wird durch den Namen des Spielers ersetzt
+not-enough-tokens: "&c{name}&f hat nicht genügend Tokens, um sie zu entfernen"
+
+# Nachricht, die angezeigt wird, wenn Tokens erfolgreich vom Guthaben eines Spielers entfernt werden
+# {amount} ist die Anzahl der Tokens und {name} ist der Name des Spielers
+successfully-removed-tokens: "Es wurden erfolgreich &e{amount} Tokens&f vom Guthaben von &a{name}&f entfernt"
+
+# Nachricht, die angezeigt wird, wenn das Token-Guthaben eines Spielers nicht abgerufen werden kann
+# {name} ist der Name des Spielers
+could-not-retrieve-balance: "&cDas Token-Guthaben von {name} konnte nicht abgerufen werden"
+
+# Nachricht, die angezeigt wird, wenn das Token-Guthaben eines anderen Spielers angezeigt wird
+# {name} ist der Name des Spielers und {balance} ist sein aktuelles Guthaben
+players-balance: "&a{name}&f hat &e{balance} Tokens"
+
+# Nachricht, die angezeigt wird, wenn das Token-Guthaben eines Spielers erfolgreich auf einen bestimmten Betrag gesetzt wird
+# {amount} ist das neue Token-Guthaben und {name} ist der Name des Spielers
+successfully-set-tokens: "Das Token-Guthaben von &a{name}&f wurde erfolgreich auf &e{amount}&f gesetzt&f!"
