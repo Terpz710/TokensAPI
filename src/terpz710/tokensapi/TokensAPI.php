@@ -10,6 +10,10 @@ use pocketmine\utils\Config;
 
 use pocketmine\player\Player;
 
+use function mkdir;
+use function is_dir;
+use function file_exists;
+
 use terpz710\tokensapi\api\TokenManager;
 
 use terpz710\tokensapi\commands\AddTokensCommand;
@@ -26,8 +30,6 @@ final class TokensAPI extends PluginBase {
 
     protected TokenManager $manager;
 
-    public Config $messages;
-
     protected function onLoad() : void{
         self::$instance = $this;
     }
@@ -35,7 +37,24 @@ final class TokensAPI extends PluginBase {
     protected function onEnable() : void{
         $this->saveDefaultConfig();
 
-        $this->saveResource("messages.yml");
+        $languageFolder = $this->getDataFolder() . "languages/";
+        if (!is_dir($languageFolder)) {
+            mkdir($languageFolder, 0777, true);
+        }
+
+        $langConfig = [
+            "english_messages.yml", 
+            "spanish_messages.yml", 
+            "german_messages.yml", 
+            "traditional_chinese_messages.yml", 
+            "french_messages.yml"
+        ];
+        
+        foreach ($langConfig as $file) {
+            if (!file_exists($languageFolder . $file)) {
+                $this->saveResource("languages/" . $file, false);
+            }
+        }
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
 
@@ -49,8 +68,6 @@ final class TokensAPI extends PluginBase {
             new TopBalanceCommand()
         ]);
 
-        $this->messages = new Config($this->getDataFolder() . "messages.yml");
-
         $this->manager = new TokenManager();
     }
 
@@ -58,7 +75,7 @@ final class TokensAPI extends PluginBase {
         return self::$instance;
     }
 
-    private function getTokenHandler() {
+    protected function getTokenHandler() {
         return $this->manager->getHandler();
     }
 
