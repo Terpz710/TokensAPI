@@ -145,6 +145,7 @@ $api = TokensAPI::getInstance();
  */
 if (!$api->hasTokenBalance($player)) {
     $player->sendMessage("Steve does not have a token balance");
+    return;
     }
 
 $api->setTokens($player, $amount);
@@ -161,6 +162,7 @@ $amount = 100;
  */
 if (!$api->hasTokenBalance($name)) {
     $player->sendMessage($name . " does not have a token balance");
+    return;
     }
 
 $api->setTokens($name, $amount);
@@ -190,5 +192,6 @@ Click below to sumbit a bug report:
 
 * Configurable messages (completed)
 * MySQL and MySQL Lite (completed)
+* Multi-language support (not-completed)
 
   Got any ideas? DM me via [discord](https://discord.gg/eQpvm8Zj) Ace873056
