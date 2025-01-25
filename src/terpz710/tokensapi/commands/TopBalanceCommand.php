@@ -14,6 +14,7 @@ use pocketmine\player\Player;
 
 use pocketmine\utils\TextFormat as TextColor;
 
+use function is_numeric;
 use function number_format;
 
 use terpz710\tokensapi\TokensAPI;
@@ -47,14 +48,15 @@ class TopBalanceCommand extends Command implements PluginOwned {
 
         $topBalances = TokensAPI::getInstance()->getTopTokenBalances();
 
-        $sender->getNetworkSession()->onChatMessage("§l=== §eTop Token Balances§f ===");
-        foreach ($topBalances as $rank => $data) {
+        $sender->getNetworkSession()->onChatMessage("§l=== §eTop 10 Token Balances§f ===");
+        $rankDisplay = 1;
+        foreach ($topBalances as $data) {
             $username = $data["username"];
-            $balance = $data["balance"];
-            $rankDisplay = $rank + 1;
+            $balance = is_numeric($data["balance"]) ? $data["balance"] : 0;
             $sender->getNetworkSession()->onChatMessage("§7" . $rankDisplay . ". §f" . $username . "§7 - §e" . number_format($balance) . " tokens");
+            $rankDisplay++;
         }
-        $sender->getNetworkSession()->onChatMessage("§l========================");
+        $sender->getNetworkSession()->onChatMessage("§l===========================");
         return true;
     }
 
