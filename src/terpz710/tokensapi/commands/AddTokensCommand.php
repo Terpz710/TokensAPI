@@ -28,7 +28,7 @@ class AddTokensCommand extends Command implements PluginOwned {
 
     public function __construct() {
         parent::__construct("addtokens");
-        $this->getDescription("Add tokens to a player's balance");
+        $this->setDescription("Add tokens to a player's balance");
         $this->setUsage("Usage: /addtokens <player> <amount>");
         $this->setPermission(Permission::PERM_ADDTOKENS);
 
