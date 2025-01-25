@@ -8,7 +8,7 @@ Always wanted to add a token system to your [Pocketmine-MP](https://github.com/p
 
 This plugin is still under development so the plugin may seem unfinished! 🔨🧱🔧🚧🪛
 
-Easy to use API for developers ❤️
+Easy to use API for developers! ❤️
 
 **TokensAPI** had a huge code rewrite on January 24, 2025
 
