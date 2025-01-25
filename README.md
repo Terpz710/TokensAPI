@@ -6,6 +6,8 @@
 
 Always wanted to add a token system to your [Pocketmine-MP](https://github.com/pmmp/PocketMine-MP) server? Look no more, with this plugin you can now give players token balances! Players can pay eachother and much more!
 
+This plugin also supports multi-language support, The only downside is that I used Google translate so some messages may appear out of placed/unright. Sorry if Google butchered your language! Help is always wanted so if you want to contribute please open a pull request thank you!
+
 This plugin is still under development so the plugin may seem unfinished! 🔨🧱🔧🚧🪛
 
 Easy to use API for developers! ❤️
@@ -13,6 +15,13 @@ Easy to use API for developers! ❤️
 **TokensAPI** had a huge code rewrite on January 24, 2025
 
 ***This rewrite introduced new features aswell as fixes/improvements. Configurable messages, added multiple storage types for storing token balances and rewrote 99% of the code.***
+
+# Features
+* Configurable messages
+* Multi-language support (English, Spanish, German, French, Traditional Chinese, Simplified Chinese and more to come!)
+* Multiple storage types (MySQL, SQLite, JSON, YAML and TXT)
+* Easy to use API
+* ScoreHud support (See `Addon` section)
 
 # Commands
 | Command                                   | Description                                                                   | Permission                                    | Default    |
@@ -196,8 +205,8 @@ Link to addon: [TokensAPIScoreTag](https://github.com/Terpz710/TokensAPIScoreTag
 
 # TODO
 
-* Configurable messages (completed)
-* MySQL and MySQL Lite (completed)
-* Multi-language support (not-completed)
+- [x] Configurable messages (completed)
+- [x] MySQL and MySQL Lite (completed)
+- [x] Multi-language support (completed)
 
   Got any ideas? DM me via [discord](https://discord.gg/eQpvm8Zj) Ace873056
