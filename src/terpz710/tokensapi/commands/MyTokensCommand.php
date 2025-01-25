@@ -26,7 +26,7 @@ class MyTokensCommand extends Command implements PluginOwned {
 
     public function __construct() {
         parent::__construct("mytokens");
-        $this->getDescription("See your token balance");
+        $this->setDescription("See your token balance");
         $this->setPermission(Permission::PERM_MYTOKENS);
 
         $this->plugin = TokensAPI::getInstance();
