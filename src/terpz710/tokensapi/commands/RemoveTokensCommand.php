@@ -46,7 +46,7 @@ final class RemoveTokensCommand extends Command implements PluginOwned {
         }
 
         if (count($args) < 2) {
-            $sender->sendMessage(TextFormat::RED . $this->getUsage());
+            $sender->sendMessage(TextColor::RED . $this->getUsage());
             return false;
         }
 
