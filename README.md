@@ -17,13 +17,13 @@ Easy to use API for developers ❤️
 # Commands
 | Command                                   | Description                                                                   | Permission                                    | Default    |
 |-------------------------------------------|-------------------------------------------------------------------------------|-----------------------------------------------|------------|
-| ```/addtoken <player> <amount>```         | ```Allows the op-player to add tokens from another player token balance.```   | ```tokensapi.addtoken```                  | ```op```   |
-| ```/settoken <player> <amount>```         | ```Allows the op-player to set another from anothet player token balance.```  | ```tokensapi.settoken```                  | ```op```   |
-| ```/removetoken <player> <amount>```      | ```Allows the op-player to remove tokens another player token balance.```     | ```tokensapi.removetoken```               | ```op```   |
-| ```/paytoken <player> <amount>```         | ```Allows the player to pay tokens to another player token balance.```        | ```tokensapi.paytoken```                  | ```true``` |
-| ```/seetoken <player>```                  | ```Allows the player to see another players token balance.```                 | ```tokensapi.seetoken```                  | ```true``` |
-| ```/mytoken```                            | ```Allows the player to see their token balance.```                           | ```tokensapi.mytoken```                   | ```true``` |
-| ```/toptoken```                           | ```Allows the player to see the top token balances on the server.```          | ```tokensapi.topbalances```                  | ```true``` |
+| ```/addtokens <player> <amount>```         | ```Allows the op-player to add tokens from another player token balance.```   | ```tokensapi.addtoken```                  | ```op```   |
+| ```/settokens <player> <amount>```         | ```Allows the op-player to set another from anothet player token balance.```  | ```tokensapi.settoken```                  | ```op```   |
+| ```/removetokens <player> <amount>```      | ```Allows the op-player to remove tokens another player token balance.```     | ```tokensapi.removetoken```               | ```op```   |
+| ```/paytokens <player> <amount>```         | ```Allows the player to pay tokens to another player token balance.```        | ```tokensapi.paytoken```                  | ```true``` |
+| ```/seetokens <player>```                  | ```Allows the player to see another players token balance.```                 | ```tokensapi.seetoken```                  | ```true``` |
+| ```/mytokens```                            | ```Allows the player to see their token balance.```                           | ```tokensapi.mytoken```                   | ```true``` |
+| ```/toptokens```                           | ```Allows the player to see the top token balances on the server.```          | ```tokensapi.topbalances```                  | ```true``` |
 
 # Config
 
