@@ -146,7 +146,7 @@ $api = TokensAPI::getInstance();
 if (!$api->hasTokenBalance($player)) {
     $player->sendMessage("Steve does not have a token balance");
     return;
-    }
+}
 
 $api->setTokens($player, $amount);
 
@@ -163,7 +163,7 @@ $amount = 100;
 if (!$api->hasTokenBalance($name)) {
     $player->sendMessage($name . " does not have a token balance");
     return;
-    }
+}
 
 $api->setTokens($name, $amount);
 ```
