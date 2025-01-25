@@ -61,7 +61,7 @@ $api = TokensAPI::getInstance();
 
 **How to retrieve a players token balance:**
 ```php
-$player can be either an instance of Player::class or PlayerName (e.g. Steve)
+/** $player can be either an instance of Player::class or PlayerName (e.g. Steve) */
 
 $api = TokensAPI::getInstance();
 
@@ -76,7 +76,7 @@ $api->getTokenBalance($name);
 
 **How to add tokens to a player:**
 ```php
-$player can be either an instance of Player::class or PlayerName (e.g. Steve)
+/** $player can be either an instance of Player::class or PlayerName (e.g. Steve) */
 
 $amount = 100;
 
@@ -95,7 +95,7 @@ $api->addTokens($name, $amount);
 
 **How to remove tokens from a player:**
 ```php
-$player can be either an instance of Player::class or PlayerName (e.g. Steve)
+/** $player can be either an instance of Player::class or PlayerName (e.g. Steve) */
 
 $amount = 100;
 
@@ -114,7 +114,7 @@ $api->removeTokens($name, $amount);
 
 **How to set a players token balance:**
 ```php
-$player can be either an instance of Player::class or PlayerName (e.g. Steve)
+/** $player can be either an instance of Player::class or PlayerName (e.g. Steve) */
 
 $amount = 100;
 
@@ -133,7 +133,7 @@ $api->setTokens($name, $amount);
 
 **How to check if a player has a token balance before adding tokens:**
 ```php
-$player can be either an instance of Player::class or PlayerName (e.g. Steve)
+/** $player can be either an instance of Player::class or PlayerName (e.g. Steve) */
 
 $amount = 100;
 
