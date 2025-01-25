@@ -1,11 +1,22 @@
 # Terpz710
 
+# NOTE: All translations were done via Google translate, Sorry if Google butchered your language!
+# Choose the language for all the messages:
+# Options:
+# - "en": English (default)
+# - "es": Spanish
+# - "fr": French
+# - "de": German
+# - "zh-t": Traditional Chinese
+# - "zh-s": Simplified Chinese
+language: "en"
+
 # Choose the storage type for player balances:
 # Options:
 # - "sqlite": Uses a SQLite database to store balances (default)
 # - "mysql": Uses a MySQL database to store balances
 # - "json": Uses a JSON file to store balances
-# - "yml": Uses a YAML file to store balances
+# - "yml": Uses a YML file to store balances
 # - "txt": Uses a TXT file to store balances
 storage: "sqlite"
 
