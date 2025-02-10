@@ -30,6 +30,11 @@
         SELECT balance FROM tokens WHERE uuid = :uuid;
     -- #}
 
+    -- #{ get_by_name
+        -- # :name string
+        SELECT uuid FROM tokens WHERE name = :name;
+    -- #}
+
     -- #{ add
         -- # :uuid string
         -- # :amount int
