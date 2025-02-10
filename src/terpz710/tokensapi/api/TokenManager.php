@@ -8,6 +8,8 @@ use pocketmine\player\Player;
 
 use terpz710\tokensapi\TokensAPI;
 
+use terpz710\tokensapi\event\TokenBalanceChangeEvent;
+
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
 
@@ -69,6 +71,7 @@ final class TokenManager {
     }
 
     public function addTokens(Player|string $player, int $amount){
+        (new TokenBalanceChangeEvent($player))->call();
         $uuid = $this->resolveUuid($player);
         if ($uuid === '') return;
 
@@ -78,6 +81,7 @@ final class TokenManager {
     }
 
     public function removeTokens(Player|string $player, int $amount){
+        (new TokenBalanceChangeEvent($player))->call();
         $uuid = $this->resolveUuid($player);
         if ($uuid === '') return;
 
@@ -87,6 +91,7 @@ final class TokenManager {
     }
 
     public function setTokens(Player|string $player, int $amount){
+        (new TokenBalanceChangeEvent($player))->call();
         $uuid = $this->resolveUuid($player);
         if ($uuid === '') return;
 
