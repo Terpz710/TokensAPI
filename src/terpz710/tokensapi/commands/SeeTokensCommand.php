@@ -57,7 +57,7 @@ final class SeeTokensCommand extends Command implements PluginOwned {
             return false;
         }
 
-        $balance = $this->plugin->getTokenBalance($targetName);
+        $balance = $this->plugin->getTokens($targetName);
         if ($balance === null) {
             $sender->sendMessage((string) new Message("could-not-retrieve-balance", ["{name}"], [$targetName]));
             return false;
