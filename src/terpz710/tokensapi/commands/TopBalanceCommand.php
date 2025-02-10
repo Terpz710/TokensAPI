@@ -46,7 +46,7 @@ class TopBalanceCommand extends Command implements PluginOwned {
             return false;
         }
 
-        $topBalances = TokensAPI::getInstance()->getTopTokenBalances();
+        $topBalances = TokensAPI::getInstance()->getTopTokens();
 
         $sender->getNetworkSession()->onChatMessage("§l=== §eTop 10 Token Balances§f ===");
         $rankDisplay = 1;
