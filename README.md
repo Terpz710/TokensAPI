@@ -39,23 +39,42 @@ Easy to use API for developers! ❤️
 ```php
 # Terpz710
 
-# Choose the storage type for player balances:
+# NOTE: All translations were done via Google translate, Sorry if Google butchered your language!
+# Choose the language for all the messages:
 # Options:
-# - "sqlite": Uses a SQLite database to store balances (default)
-# - "mysql": Uses a MySQL database to store balances
-# - "json": Uses a JSON file to store balances
-# - "yml": Uses a YML file to store balances
-# - "txt": Uses a TXT file to store balances
-storage: "sqlite"
+# - "en": English (default)
+# - "es": Spanish
+# - "fr": French
+# - "de": German
+# - "zh-t": Traditional Chinese
+# - "zh-s": Simplified Chinese
+language: "en"
+
+# Choose the storage type for player token balances:
+database:
+  # The database type. "sqlite" and "mysql" are supported.
+  type: sqlite
+
+  # Edit these settings only if you choose "sqlite".
+  sqlite:
+    # The file name of the database in the plugin data folder.
+    # You can also put an absolute path here.
+    file: tokens.db
+
+  # Edit these settings only if you choose "mysql".
+  mysql:
+    host: 127.0.0.1
+    # Avoid using the "root" user for security reasons.
+    username: root
+    password: ""
+    schema: your_schema
+
+  # The maximum number of simultaneous SQL queries
+  # Recommended: 1 for sqlite, 2 for MySQL. You may want to further increase this value if your MySQL connection is very slow.
+  worker-limit: 1
 
 # Starting amount for new player accounts
 starting-amount: 1000
-
-# MySQL Database Configuration
-mysql-host: 127.0.0.1         # Hostname or IP of your MySQL server
-mysql-user: "root"            # Username for MySQL
-mysql-password: ""            # Password for MySQL
-mysql-database: "TokensAPI"   # Database name for storing player balances
 ```
 
 # API for Developers ❤️
@@ -74,13 +93,13 @@ $api = TokensAPI::getInstance();
 
 $api = TokensAPI::getInstance();
 
-$api->getTokenBalance($player);
+$api->getTokens($player);
 
 or
 
 $name = "Steve";
 
-$api->getTokenBalance($name);
+$api->getTokens($name);
 ```
 
 **How to add tokens to a player:**
