@@ -104,7 +104,7 @@ final class TokensAPI extends PluginBase {
         return $this->getTokenManager()->setTokens($player, $amount);
     }
 
-    public function getTopTokens(int $limit = 10) : array{
+    public function getTopTokens() : array{
         return $this->getTokenManager()->getTopTokens($limit);
     }
 }
