@@ -104,7 +104,7 @@ final class TokenManager {
         return $this->tokenCache['top'] ?? [];
     }
 
-    private function resolveUuid(Player|string $player): string {
+    private function resolveUuid(Player|string $player) : ?string{
         if ($player instanceof Player) {
             return $player->getUniqueId()->toString();
         }
@@ -120,6 +120,6 @@ final class TokenManager {
             $result = !empty($rows) ? $rows[0]["uuid"] : null;
         });
 
-        return $result ?? '';
+        return $result;
     }
 }
