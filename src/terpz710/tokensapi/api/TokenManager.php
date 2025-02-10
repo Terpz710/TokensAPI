@@ -5,26 +5,24 @@ declare(strict_types=1);
 namespace wavycraft\tokens;
 
 use pocketmine\player\Player;
-
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
 
-use Closure;
-
 final class TokenManager {
 
-    protected DataConnector $database;
+    private DataConnector $database;
 
-    public function __construct(protected TokensAPI $plugin) {
-        $this->plugin = $plugin;
+    public function __construct(private TokensAPI $plugin) {
+        $this->init();
     }
 
-    public function init() : void{
+    private function init(): void {
         $this->database = libasynql::create($this->plugin, $this->plugin->getConfig()->get("database"), [
             "sqlite" => "database/sqlite.sql",
             "mysql" => "database/mysql.sql"
         ]);
-        $this->database->executeGeneric("table.hub");
+
+        $this->database->executeGeneric("tokens.init");
     }
 
     public function createTokenBalance(Player|string $player): void {
@@ -32,11 +30,16 @@ final class TokenManager {
         $this->database->executeChange("tokens.create", ["name" => $name]);
     }
 
-    public function hasTokenBalance(Player|string $player, Closure $callback): void {
+    public function hasTokenBalance(Player|string $player): bool {
         $name = $player instanceof Player ? $player->getName() : $player;
-        $this->database->executeSelect("tokens.has", ["name" => $name], function (array $rows) use ($callback) {
-            $callback(!empty($rows));
-        });
+        $result = $this->database->executeSelect("tokens.has", ["name" => $name]);
+        return !empty($result);
+    }
+
+    public function getTokens(Player|string $player): int {
+        $name = $player instanceof Player ? $player->getName() : $player;
+        $result = $this->database->executeSelect("tokens.get", ["name" => $name]);
+        return !empty($result) ? (int) $result[0]["balance"] : 0;
     }
 
     public function addTokens(Player|string $player, int $amount): void {
@@ -54,9 +57,7 @@ final class TokenManager {
         $this->database->executeChange("tokens.set", ["name" => $name, "amount" => $amount]);
     }
 
-    public function getTopTokens(Closure $callback): void {
-        $this->database->executeSelect("tokens.top", [], function (array $rows) use ($callback) {
-            $callback($rows);
-        });
+    public function getTopTokens(): array {
+        return $this->database->executeSelect("tokens.top", []);
     }
 }
