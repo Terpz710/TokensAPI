@@ -68,42 +68,43 @@ final class TokensAPI extends PluginBase {
             new TopBalanceCommand()
         ]);
 
-        $this->manager = new TokenManager();
+        $this->manager = new TokenManager($this);
+        $this->manager->init();
     }
 
     public static function getInstance() : self{
         return self::$instance;
     }
 
-    protected function getTokenHandler() {
-        return $this->manager->getHandler();
+    protected function getTokenManager() : TokenManager{
+        return $this->manager;
     }
 
-    public function createTokenBalance(Player|string $player) {
-        return $this->getTokenHandler()->createTokenBalance($player);
+    public function createTokenBalance(Player $player) : void{
+        return $this->getTokenManager()->createTokenBalance($player);
     }
 
     public function hasTokenBalance(Player|string $player) : bool{
-        return $this->getTokenHandler()->hasTokenBalance($player);
+        return $this->getTokenManager()->hasTokenBalance($player);
     }
 
     public function getTokenBalance(Player|string $player) : ?int{
-        return $this->getTokenHandler()->getTokenBalance($player);
+        return $this->getTokenManager()->getTokenBalance($player);
     }
 
-    public function addTokens(Player|string $player, int $amount) {
-        return $this->getTokenHandler()->addTokens($player, $amount);
+    public function addTokens(Player|string $player, int $amount) : void{
+        return $this->getTokenManager()->addTokens($player, $amount);
     }
 
-    public function removeTokens(Player|string $player, int $amount) {
-        return $this->getTokenHandler()->removeTokens($player, $amount);
+    public function removeTokens(Player|string $player, int $amount) : void{
+        return $this->getTokenManager()->removeTokens($player, $amount);
     }
 
-    public function setTokens(Player|string $player, int $amount) {
-        return $this->getTokenHandler()->setTokens($player, $amount);
+    public function setTokens(Player|string $player, int $amount) : void{
+        return $this->getTokenManager()->setTokens($player, $amount);
     }
 
     public function getTopTokenBalances(int $limit = 10) : array{
-        return $this->getTokenHandler()->getTopTokenBalances($limit);
+        return $this->getTokenManager()->getTopTokenBalances($limit);
     }
 }
