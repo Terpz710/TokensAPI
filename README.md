@@ -19,7 +19,7 @@ Easy to use API for developers! ❤️
 # Features
 * Configurable messages
 * Multi-language support (English, Spanish, German, French, Traditional Chinese, Simplified Chinese and more to come!)
-* Multiple storage types (MySQL, SQLite, JSON, YAML and TXT)
+* 2 storage types (MySQL and SQLite)
 * Easy to use API
 * ScoreHud support (See `Addon` section)
 
