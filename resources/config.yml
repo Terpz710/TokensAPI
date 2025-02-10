@@ -36,9 +36,3 @@ database:
 
 # Starting amount for new player accounts
 starting-amount: 1000
-
-# MySQL Database Configuration
-mysql-host: 127.0.0.1         # Hostname or IP of your MySQL server
-mysql-user: "root"            # Username for MySQL
-mysql-password: ""            # Password for MySQL
-mysql-database: "TokensAPI"   # Database name for storing player balances
