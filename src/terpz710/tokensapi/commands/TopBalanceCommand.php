@@ -46,21 +46,17 @@ class TopBalanceCommand extends Command implements PluginOwned {
             return false;
         }
 
-        $topBalances = TokensAPI::getInstance()->getTopTokens();
-
-        $sender->getNetworkSession()->onChatMessage("§l=== §eTop 10 Token Balances§f ===");
-        $rankDisplay = 1;
-        foreach ($topBalances as $data) {
-            $username = $data["username"];
-            $balance = is_numeric($data["balance"]) ? $data["balance"] : 0;
-            $sender->getNetworkSession()->onChatMessage("§7" . $rankDisplay . ". §f" . $username . "§7 - §e" . number_format($balance) . " tokens");
-            $rankDisplay++;
-        }
-        $sender->getNetworkSession()->onChatMessage("§l===========================");
+        TokensAPI::getInstance()->getTopTokens(function(array $topBalances) use ($sender) {
+            $sender->sendMessage("§l=== §eTop 10 Token Balances§f ===");
+            $rankDisplay = 1;
+            foreach ($topBalances as $data) {
+                $username = $data["username"];
+                $balance = is_numeric($data["balance"]) ? $data["balance"] : 0;
+                $sender->sendMessage("§7" . $rankDisplay . ". §f" . $username . "§7 - §e" . number_format($balance) . " tokens");
+                $rankDisplay++;
+            }
+            $sender->sendMessage("§l===========================");
+        });
         return true;
-    }
-
-    public function getOwningPlugin() : Plugin{
-        return $this->plugin;
     }
 }
