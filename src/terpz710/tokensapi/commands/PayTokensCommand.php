@@ -58,7 +58,7 @@ final class PayTokensCommand extends Command implements PluginOwned {
             return false;
         }
 
-        $currentBalance = $this->plugin->getTokenBalance($sender->getName());
+        $currentBalance = $this->plugin->getTokens($sender->getName());
         if ($currentBalance === null || $currentBalance < $amount) {
             $sender->sendMessage((string) new Message("insufficient-tokens"));
             return false;
