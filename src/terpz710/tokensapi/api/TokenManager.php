@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace terpz710\tokensapi\api;
 
 use pocketmine\player\Player;
+
 use terpz710\tokensapi\TokensAPI;
+
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
 
 final class TokenManager {
     
     protected DataConnector $database;
+    
     protected array $tokenCache = [];
 
     public function __construct(protected TokensAPI $plugin) {
@@ -92,17 +95,13 @@ final class TokenManager {
         $this->database->executeChange("tokens.set", ["uuid" => $uuid, "amount" => $amount]);
     }
 
-    public function getTopTokens() : array{
-        if (isset($this->tokenCache['top'])) {
-            return $this->tokenCache['top'];
-        }
-
-        $this->database->executeSelect("tokens.top", [], function(array $rows) {
+    public function getTopTokens(callable $callback){
+        $this->database->executeSelect("tokens.top", [], function(array $rows) use ($callback) {
             $this->tokenCache['top'] = $rows;
+            $callback($rows);
         });
-
-        return $this->tokenCache['top'] ?? [];
     }
+
 
     private function resolveUuid(Player|string $player) : ?string{
         if ($player instanceof Player) {
