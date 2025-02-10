@@ -7,4 +7,7 @@ branches:
 projects:
   TokensAPI:
     path: ""
+    libs:
+      - src: poggit/libasynql/libasynql
+        version: ^4.2.3
 ...
