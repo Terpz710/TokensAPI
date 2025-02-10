@@ -80,7 +80,7 @@ final class TokensAPI extends PluginBase {
         return $this->manager;
     }
 
-    public function createTokenBalance(Player $player) : void{
+    public function createTokenBalance(Player $player){
         return $this->getTokenManager()->createTokenBalance($player);
     }
 
@@ -92,15 +92,15 @@ final class TokensAPI extends PluginBase {
         return $this->getTokenManager()->getTokenBalance($player);
     }
 
-    public function addTokens(Player|string $player, int $amount) : void{
+    public function addTokens(Player|string $player, int $amount){
         return $this->getTokenManager()->addTokens($player, $amount);
     }
 
-    public function removeTokens(Player|string $player, int $amount) : void{
+    public function removeTokens(Player|string $player, int $amount){
         return $this->getTokenManager()->removeTokens($player, $amount);
     }
 
-    public function setTokens(Player|string $player, int $amount) : void{
+    public function setTokens(Player|string $player, int $amount){
         return $this->getTokenManager()->setTokens($player, $amount);
     }
 
