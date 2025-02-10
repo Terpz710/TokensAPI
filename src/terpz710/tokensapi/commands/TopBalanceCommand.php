@@ -50,7 +50,7 @@ class TopBalanceCommand extends Command implements PluginOwned {
             $sender->sendMessage("§l=== §eTop 10 Token Balances§f ===");
             $rankDisplay = 1;
             foreach ($topBalances as $data) {
-                $username = $data["name"] ?? "Unknown"; // Use 'name' from database
+                $username = $data["name"] ?? "Unknown";
                 $balance = is_numeric($data["balance"] ?? null) ? $data["balance"] : 0;
                 $sender->sendMessage("§7" . $rankDisplay . ". §f" . $username . "§7 - §e" . number_format($balance) . " tokens");
                 $rankDisplay++;
