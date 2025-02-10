@@ -8,9 +8,9 @@ Always wanted to add a token system to your [Pocketmine-MP](https://github.com/p
 
 This plugin also supports multi-language support, The only downside is that I used Google translate so some messages may appear out of placed/unright. Sorry if Google butchered your language! Help is always wanted so if you want to contribute please open a pull request thank you!
 
-This plugin is still under development so the plugin may seem unfinished! 🔨🧱🔧🚧🪛
+ScoreHud is supported scroll down to the `Addon` section to download!
 
-Easy to use API for developers! ❤️
+**Easy to use API for developers! ❤️**
 
 **TokensAPI** had a huge code rewrite on January 24, 2025
 
