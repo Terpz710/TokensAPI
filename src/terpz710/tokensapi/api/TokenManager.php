@@ -2,39 +2,61 @@
 
 declare(strict_types=1);
 
-namespace terpz710\tokensapi\api;
+namespace wavycraft\tokens;
 
-use terpz710\tokensapi\TokensAPI;
+use pocketmine\player\Player;
 
-use terpz710\tokensapi\api\database\TokensJson;
-use terpz710\tokensapi\api\database\TokensMySQL;
-use terpz710\tokensapi\api\database\TokensSQLite;
-use terpz710\tokensapi\api\database\TokensTxt;
-use terpz710\tokensapi\api\database\TokensYml;
+use poggit\libasynql\DataConnector;
+use poggit\libasynql\libasynql;
+
+use Closure;
 
 final class TokenManager {
 
-    private TokenInterface $handler;
+    protected DataConnector $database;
 
-    public function __construct() {
-        $databaseType = TokensAPI::getInstance()->getConfig()->get("storage");
-
-        if ($databaseType === "json") {
-            $this->handler = new TokensJson();
-        } elseif ($databaseType === "mysql") {
-            $this->handler = new TokensMySQL();
-        } elseif ($databaseType === "sqlite") {
-            $this->handler = new TokensSQLite();
-        } elseif ($databaseType === "txt") {
-            $this->handler = new TokensTxt();
-        } elseif ($databaseType === "yml") {
-            $this->handler = new TokensYml();
-        } else {
-            throw new \InvalidArgumentException("Invalid storage type specified in the configuration: " . $databaseType);
-        }
+    public function __construct(protected TokensAPI $plugin) {
+        $this->plugin = $plugin;
     }
 
-    public function getHandler() : TokenInterface{
-        return $this->handler;
+    public function init() : void{
+        $this->database = libasynql::create($this->plugin, $this->plugin->getConfig()->get("database"), [
+            "sqlite" => "database/sqlite.sql",
+            "mysql" => "database/mysql.sql"
+        ]);
+        $this->database->executeGeneric("table.hub");
+    }
+
+    public function createTokenBalance(Player|string $player): void {
+        $name = $player instanceof Player ? $player->getName() : $player;
+        $this->database->executeChange("tokens.create", ["name" => $name]);
+    }
+
+    public function hasTokenBalance(Player|string $player, Closure $callback): void {
+        $name = $player instanceof Player ? $player->getName() : $player;
+        $this->database->executeSelect("tokens.has", ["name" => $name], function (array $rows) use ($callback) {
+            $callback(!empty($rows));
+        });
+    }
+
+    public function addTokens(Player|string $player, int $amount): void {
+        $name = $player instanceof Player ? $player->getName() : $player;
+        $this->database->executeChange("tokens.add", ["name" => $name, "amount" => $amount]);
+    }
+
+    public function removeTokens(Player|string $player, int $amount): void {
+        $name = $player instanceof Player ? $player->getName() : $player;
+        $this->database->executeChange("tokens.remove", ["name" => $name, "amount" => $amount]);
+    }
+
+    public function setTokens(Player|string $player, int $amount): void {
+        $name = $player instanceof Player ? $player->getName() : $player;
+        $this->database->executeChange("tokens.set", ["name" => $name, "amount" => $amount]);
+    }
+
+    public function getTopTokens(Closure $callback): void {
+        $this->database->executeSelect("tokens.top", [], function (array $rows) use ($callback) {
+            $callback($rows);
+        });
     }
 }
