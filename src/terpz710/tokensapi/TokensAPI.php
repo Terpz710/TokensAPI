@@ -105,6 +105,6 @@ final class TokensAPI extends PluginBase {
     }
 
     public function getTopTokens() : array{
-        return $this->getTokenManager()->getTopTokens($limit);
+        return $this->getTokenManager()->getTopTokens();
     }
 }
