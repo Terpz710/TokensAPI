@@ -5,13 +5,17 @@ declare(strict_types=1);
 namespace terpz710\tokensapi\api;
 
 use pocketmine\player\Player;
-use poggit\libasynql\DataConnector;
-use poggit\libasynql\libasynql;
+
 use terpz710\tokensapi\TokensAPI;
 
-final class TokenManager {
+use poggit\libasynql\DataConnector;
+use poggit\libasynql\libasynql;
 
+final class TokenManager {
+    
     protected DataConnector $database;
+    
+    protected array $tokenCache = [];
 
     public function __construct(protected TokensAPI $plugin) {
         $this->plugin = $plugin;
@@ -29,43 +33,78 @@ final class TokenManager {
     public function createTokenBalance(Player $player): void {
         $uuid = $player->getUniqueId()->toString();
         $name = $player->getName();
-        $startingAmount = $this->plugin->getConfig()->get("starting-amount", 0); // Default to 0 if not set
+        $startingAmount = $this->plugin->getConfig()->get("starting-amount", 0);
 
         $this->database->executeChange("tokens.create", [
             "uuid" => $uuid,
             "name" => $name,
             "balance" => $startingAmount
-        ]);
+        ], function() use ($uuid, $startingAmount) {
+            $this->tokenCache[$uuid] = $startingAmount;
+        });
     }
 
     public function hasTokenBalance(Player|string $player): bool {
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        $result = $this->database->executeSelect("tokens.has", ["uuid" => $uuid]);
-        return !empty($result);
+
+        if (isset($this->tokenCache[$uuid])) {
+            return true;
+        }
+
+        $this->database->executeSelect("tokens.has", ["uuid" => $uuid], function(array $rows) use ($uuid) {
+            $this->tokenCache[$uuid] = !empty($rows);
+        });
+
+        return isset($this->tokenCache[$uuid]) ? $this->tokenCache[$uuid] : false;
     }
 
     public function getTokens(Player|string $player): int {
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        $result = $this->database->executeSelect("tokens.get", ["uuid" => $uuid]);
-        return !empty($result) ? (int) $result[0]["balance"] : 0;
+
+        if (isset($this->tokenCache[$uuid])) {
+            return $this->tokenCache[$uuid];
+        }
+
+        $this->database->executeSelect("tokens.get", ["uuid" => $uuid], function(array $rows) use ($uuid) {
+            $this->tokenCache[$uuid] = !empty($rows) ? (int) $rows[0]["balance"] : 0;
+        });
+
+        return $this->tokenCache[$uuid] ?? 0; // Return cached value or 0 if not loaded yet
     }
 
     public function addTokens(Player|string $player, int $amount): void {
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        $this->database->executeChange("tokens.add", ["uuid" => $uuid, "amount" => $amount]);
+
+        $this->database->executeChange("tokens.add", ["uuid" => $uuid, "amount" => $amount], function() use ($uuid, $amount) {
+            $this->tokenCache[$uuid] = ($this->tokenCache[$uuid] ?? 0) + $amount;
+        });
     }
 
     public function removeTokens(Player|string $player, int $amount): void {
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        $this->database->executeChange("tokens.remove", ["uuid" => $uuid, "amount" => $amount]);
+
+        $this->database->executeChange("tokens.remove", ["uuid" => $uuid, "amount" => $amount], function() use ($uuid, $amount) {
+            $this->tokenCache[$uuid] = max(0, ($this->tokenCache[$uuid] ?? 0) - $amount);
+        });
     }
 
     public function setTokens(Player|string $player, int $amount): void {
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        $this->database->executeChange("tokens.set", ["uuid" => $uuid, "amount" => $amount]);
+
+        $this->database->executeChange("tokens.set", ["uuid" => $uuid, "amount" => $amount], function() use ($uuid, $amount) {
+            $this->tokenCache[$uuid] = $amount;
+        });
     }
 
     public function getTopTokens(): array {
-        return $this->database->executeSelect("tokens.top", []);
+        if (isset($this->tokenCache['top'])) {
+            return $this->tokenCache['top'];
+        }
+
+        $this->database->executeSelect("tokens.top", [], function(array $rows) {
+            $this->tokenCache['top'] = $rows;
+        });
+
+        return $this->tokenCache['top'] ?? [];
     }
 }
