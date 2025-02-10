@@ -80,6 +80,10 @@ final class TokensAPI extends PluginBase {
         return $this->manager;
     }
 
+    public function loadPlayerBalance(Player $player){
+        return $this->getTokenManager()->loadPlayerBalance($player);
+    }
+
     public function createTokenBalance(Player $player){
         return $this->getTokenManager()->createTokenBalance($player);
     }
