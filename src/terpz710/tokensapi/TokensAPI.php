@@ -108,7 +108,7 @@ final class TokensAPI extends PluginBase {
         return $this->getTokenManager()->setTokens($player, $amount);
     }
 
-    public function getTopTokens(callable $callback) : array{
-        return $this->getTokenManager()->getTopTokens($callback);
+    public function getTopTokens(callable $callback){
+        $this->getTokenManager()->getTopTokens($callback);
     }
 }
