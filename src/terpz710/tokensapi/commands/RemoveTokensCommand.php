@@ -63,7 +63,7 @@ final class RemoveTokensCommand extends Command implements PluginOwned {
             return false;
         }
 
-        $currentBalance = $this->plugin->getTokenBalance($playerName);
+        $currentBalance = $this->plugin->getTokens($playerName);
         if ($currentBalance === null || $currentBalance < $amount) {
             $sender->sendMessage((string) new Message("not-enough-tokens", ["{name}"], [$playerName]));
             return false;
