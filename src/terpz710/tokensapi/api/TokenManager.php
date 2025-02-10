@@ -30,7 +30,7 @@ final class TokenManager {
         $this->database->executeGeneric("table.tokens");
     }
 
-    public function loadPlayerBalance(Player $player): void {
+    public function loadPlayerBalance(Player $player){
         $uuid = $player->getUniqueId()->toString();
 
         $this->database->executeSelect("tokens.get", ["uuid" => $uuid], function(array $rows) use ($uuid) {
@@ -38,38 +38,56 @@ final class TokenManager {
         });
     }
 
-    public function hasTokenBalance(Player|string $player): bool {
+    public function createTokenBalance(Player $player){
+        $uuid = $player->getUniqueId()->toString();
+        $name = $player->getName();
+        $startingAmount = $this->plugin->getConfig()->get("starting-amount");
+
+        if ($this->hasTokenBalance($player)) {
+            return;
+        }
+
+        $this->tokenCache[$uuid] = $startingAmount;
+
+        $this->database->executeChange("tokens.create", [
+            "uuid" => $uuid,
+            "name" => $name,
+            "balance" => $startingAmount
+        ]);
+    }
+
+    public function hasTokenBalance(Player|string $player) : bool{
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
         return isset($this->tokenCache[$uuid]);
     }
 
-    public function getTokens(Player|string $player): int {
+    public function getTokens(Player|string $player) : int{
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
         return $this->tokenCache[$uuid] ?? 0;
     }
 
-    public function addTokens(Player|string $player, int $amount): void {
+    public function addTokens(Player|string $player, int $amount){
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
         $this->tokenCache[$uuid] = ($this->tokenCache[$uuid] ?? 0) + $amount;
 
         $this->database->executeChange("tokens.add", ["uuid" => $uuid, "amount" => $amount]);
     }
 
-    public function removeTokens(Player|string $player, int $amount): void {
+    public function removeTokens(Player|string $player, int $amount){
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
         $this->tokenCache[$uuid] = max(0, ($this->tokenCache[$uuid] ?? 0) - $amount);
 
         $this->database->executeChange("tokens.remove", ["uuid" => $uuid, "amount" => $amount]);
     }
 
-    public function setTokens(Player|string $player, int $amount): void {
+    public function setTokens(Player|string $player, int $amount){
         $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
         $this->tokenCache[$uuid] = $amount;
 
         $this->database->executeChange("tokens.set", ["uuid" => $uuid, "amount" => $amount]);
     }
 
-    public function getTopTokens(): array {
+    public function getTopTokens() : array{
         if (isset($this->tokenCache['top'])) {
             return $this->tokenCache['top'];
         }
