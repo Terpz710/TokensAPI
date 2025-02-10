@@ -1,0 +1,54 @@
+-- #!mysql
+
+-- #{ table
+    -- #{ tokens
+        CREATE TABLE IF NOT EXISTS tokens (
+            uuid VARCHAR(36) PRIMARY KEY,
+            name VARCHAR(16) NOT NULL,
+            balance INT NOT NULL DEFAULT 0
+        );
+    -- #}
+-- #}
+
+-- #{ tokens
+    -- #{ create
+        -- # :uuid string
+        -- # :name string
+        -- # :balance int
+        INSERT INTO tokens (uuid, name, balance)
+        VALUES (:uuid, :name, :balance)
+        ON DUPLICATE KEY UPDATE name = VALUES(name);
+    -- #}
+
+    -- #{ has
+        -- # :uuid string
+        SELECT balance FROM tokens WHERE uuid = :uuid;
+    -- #}
+
+    -- #{ get
+        -- # :uuid string
+        SELECT balance FROM tokens WHERE uuid = :uuid;
+    -- #}
+
+    -- #{ add
+        -- # :uuid string
+        -- # :amount int
+        UPDATE tokens SET balance = balance + :amount WHERE uuid = :uuid;
+    -- #}
+
+    -- #{ remove
+        -- # :uuid string
+        -- # :amount int
+        UPDATE tokens SET balance = balance - :amount WHERE uuid = :uuid;
+    -- #}
+
+    -- #{ set
+        -- # :uuid string
+        -- # :amount int
+        UPDATE tokens SET balance = :amount WHERE uuid = :uuid;
+    -- #}
+
+    -- #{ top
+        SELECT name, balance FROM tokens ORDER BY balance DESC LIMIT 10;
+    -- #}
+-- #}
