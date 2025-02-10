@@ -42,7 +42,7 @@ class MyTokensCommand extends Command implements PluginOwned {
             return false;
         }
 
-        $balance = $this->plugin->getTokenBalance($sender);
+        $balance = $this->plugin->getTokens($sender);
         $sender->sendMessage((string) new Message("your-balance", ["{balance}"], [number_format($balance)]));
         return true;
     }
