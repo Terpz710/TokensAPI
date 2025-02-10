@@ -16,5 +16,7 @@ class EventListener implements Listener {
         if (!$manager->hasTokenBalance($player)) {
             $manager->createTokenBalance($player);
         }
+
+        $manager->loadPlayerBalance($player);
     }
 }
