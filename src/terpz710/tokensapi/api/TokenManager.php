@@ -74,11 +74,11 @@ final class TokenManager {
         $uuid = $this->resolveUuid($player);
         if ($uuid === '') return;
 
-        $this->tokenCache[$uuid]['balance'] = $newBalance;
-        $this->database->executeChange("tokens.add", ["uuid" => $uuid, "amount" => $amount]);
-
         $oldBalance = $this->getTokens($player);
         $newBalance = $oldBalance + $amount;
+
+        $this->tokenCache[$uuid]['balance'] = $newBalance;
+        $this->database->executeChange("tokens.add", ["uuid" => $uuid, "amount" => $amount]);
 
         $event = new TokenBalanceChangeEvent($player, $oldBalance, $newBalance, "add");
         $event->call();
@@ -88,13 +88,11 @@ final class TokenManager {
         $uuid = $this->resolveUuid($player);
         if ($uuid === '') return;
 
-        (new RemoveTokenEvent($player, $oldBalance, $newBalance))->call();
+        $oldBalance = $this->getTokens($player);
+        $newBalance = max(0, $oldBalance - $amount);
 
         $this->tokenCache[$uuid]['balance'] = $newBalance;
         $this->database->executeChange("tokens.remove", ["uuid" => $uuid, "amount" => $amount]);
-
-        $oldBalance = $this->getTokens($player);
-        $newBalance = max(0, $oldBalance - $amount);
 
         $event = new TokenBalanceChangeEvent($player, $oldBalance, $newBalance, "remove");
         $event->call();
@@ -104,11 +102,11 @@ final class TokenManager {
         $uuid = $this->resolveUuid($player);
         if ($uuid === '') return;
 
-        $this->tokenCache[$uuid]['balance'] = $newBalance;
-        $this->database->executeChange("tokens.set", ["uuid" => $uuid, "amount" => $amount]);
-
         $oldBalance = $this->getTokens($player);
         $newBalance = $amount;
+
+        $this->tokenCache[$uuid]['balance'] = $newBalance;
+        $this->database->executeChange("tokens.set", ["uuid" => $uuid, "amount" => $amount]);
 
         $event = new TokenBalanceChangeEvent($player, $oldBalance, $newBalance, "set");
         $event->call();
