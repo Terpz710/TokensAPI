@@ -11,14 +11,28 @@
 # - "zh-s": Simplified Chinese
 language: "en"
 
-# Choose the storage type for player balances:
-# Options:
-# - "sqlite": Uses a SQLite database to store balances (default)
-# - "mysql": Uses a MySQL database to store balances
-# - "json": Uses a JSON file to store balances
-# - "yml": Uses a YML file to store balances
-# - "txt": Uses a TXT file to store balances
-storage: "sqlite"
+# Choose the storage type for player token balances:
+database:
+  # The database type. "sqlite" and "mysql" are supported.
+  type: sqlite
+
+  # Edit these settings only if you choose "sqlite".
+  sqlite:
+    # The file name of the database in the plugin data folder.
+    # You can also put an absolute path here.
+    file: tokens.db
+
+  # Edit these settings only if you choose "mysql".
+  mysql:
+    host: 127.0.0.1
+    # Avoid using the "root" user for security reasons.
+    username: root
+    password: ""
+    schema: your_schema
+
+  # The maximum number of simultaneous SQL queries
+  # Recommended: 1 for sqlite, 2 for MySQL. You may want to further increase this value if your MySQL connection is very slow.
+  worker-limit: 1
 
 # Starting amount for new player accounts
 starting-amount: 1000
