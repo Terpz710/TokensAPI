@@ -25,7 +25,7 @@ final class TokenManager {
             "mysql" => "database/mysql.sql"
         ]);
 
-        $this->database->executeGeneric("tokens.init");
+        $this->database->executeGeneric("table.tokens");
     }
 
     public function createTokenBalance(Player|string $player) : void{
