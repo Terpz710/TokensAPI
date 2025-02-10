@@ -5,23 +5,20 @@ declare(strict_types=1);
 namespace terpz710\tokensapi\api;
 
 use pocketmine\player\Player;
-
 use terpz710\tokensapi\TokensAPI;
-
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
 
 final class TokenManager {
     
     protected DataConnector $database;
-    
     protected array $tokenCache = [];
 
     public function __construct(protected TokensAPI $plugin) {
         $this->plugin = $plugin;
     }
 
-    public function init(): void {
+    public function init(){
         $this->database = libasynql::create($this->plugin, $this->plugin->getConfig()->get("database"), [
             "sqlite" => "database/sqlite.sql",
             "mysql" => "database/mysql.sql"
@@ -32,9 +29,11 @@ final class TokenManager {
 
     public function loadPlayerBalance(Player $player){
         $uuid = $player->getUniqueId()->toString();
+        $name = $player->getName();
 
-        $this->database->executeSelect("tokens.get", ["uuid" => $uuid], function(array $rows) use ($uuid) {
-            $this->tokenCache[$uuid] = !empty($rows) ? (int) $rows[0]["balance"] : 0;
+        $this->database->executeSelect("tokens.get", ["uuid" => $uuid], function(array $rows) use ($uuid, $name) {
+            $balance = !empty($rows) ? (int) $rows[0]["balance"] : 0;
+            $this->tokenCache[$uuid] = ["balance" => $balance, "name" => $name];
         });
     }
 
@@ -47,7 +46,7 @@ final class TokenManager {
             return;
         }
 
-        $this->tokenCache[$uuid] = $startingAmount;
+        $this->tokenCache[$uuid] = ["balance" => $startingAmount, "name" => $name];
 
         $this->database->executeChange("tokens.create", [
             "uuid" => $uuid,
@@ -57,32 +56,38 @@ final class TokenManager {
     }
 
     public function hasTokenBalance(Player|string $player) : bool{
-        $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        return isset($this->tokenCache[$uuid]);
+        $uuid = $this->resolveUuid($player);
+        return $uuid !== '' && isset($this->tokenCache[$uuid]);
     }
 
     public function getTokens(Player|string $player) : int{
-        $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        return $this->tokenCache[$uuid] ?? 0;
+        $uuid = $this->resolveUuid($player);
+        return $uuid !== '' ? ($this->tokenCache[$uuid]['balance'] ?? 0) : 0;
     }
 
     public function addTokens(Player|string $player, int $amount){
-        $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        $this->tokenCache[$uuid] = ($this->tokenCache[$uuid] ?? 0) + $amount;
+        $uuid = $this->resolveUuid($player);
+        if ($uuid === '') return;
+
+        $this->tokenCache[$uuid]['balance'] = ($this->tokenCache[$uuid]['balance'] ?? 0) + $amount;
 
         $this->database->executeChange("tokens.add", ["uuid" => $uuid, "amount" => $amount]);
     }
 
     public function removeTokens(Player|string $player, int $amount){
-        $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        $this->tokenCache[$uuid] = max(0, ($this->tokenCache[$uuid] ?? 0) - $amount);
+        $uuid = $this->resolveUuid($player);
+        if ($uuid === '') return;
+
+        $this->tokenCache[$uuid]['balance'] = max(0, ($this->tokenCache[$uuid]['balance'] ?? 0) - $amount);
 
         $this->database->executeChange("tokens.remove", ["uuid" => $uuid, "amount" => $amount]);
     }
 
     public function setTokens(Player|string $player, int $amount){
-        $uuid = $player instanceof Player ? $player->getUniqueId()->toString() : $player;
-        $this->tokenCache[$uuid] = $amount;
+        $uuid = $this->resolveUuid($player);
+        if ($uuid === '') return;
+
+        $this->tokenCache[$uuid]['balance'] = $amount;
 
         $this->database->executeChange("tokens.set", ["uuid" => $uuid, "amount" => $amount]);
     }
@@ -97,5 +102,24 @@ final class TokenManager {
         });
 
         return $this->tokenCache['top'] ?? [];
+    }
+
+    private function resolveUuid(Player|string $player): string {
+        if ($player instanceof Player) {
+            return $player->getUniqueId()->toString();
+        }
+
+        foreach ($this->tokenCache as $uuid => $data) {
+            if (isset($data['name']) && strtolower($data['name']) === strtolower($player)) {
+                return $uuid;
+            }
+        }
+
+        $result = null;
+        $this->database->executeSelect("tokens.get_by_name", ["name" => $player], function(array $rows) use (&$result) {
+            $result = !empty($rows) ? $rows[0]["uuid"] : null;
+        });
+
+        return $result ?? '';
     }
 }
