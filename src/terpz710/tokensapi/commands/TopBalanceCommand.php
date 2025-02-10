@@ -59,4 +59,8 @@ class TopBalanceCommand extends Command implements PluginOwned {
         });
         return true;
     }
+
+    public function getOwningPlugin() : Plugin{
+        return $this->plugin;
+    }
 }
