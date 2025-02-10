@@ -8,16 +8,19 @@ use pocketmine\event\Event;
 
 use pocketmine\player\Player;
 
-abstract class TokenEvent extends Event {
+class TokenBalanceChangeEvent extends Event {
 
     private Player|string $player;
     private int $oldBalance;
     private int $newBalance;
+    private string $changeType;
 
-    public function __construct(Player|string $player, int $oldBalance, int $newBalance) {
+    public function __construct(Player|string $player, int $oldBalance, int $newBalance, string $changeType) {
+
         $this->player = $player;
         $this->oldBalance = $oldBalance;
         $this->newBalance = $newBalance;
+        $this->changeType = $changeType;
     }
 
     public function getPlayer() : Player|string{
@@ -32,6 +35,7 @@ abstract class TokenEvent extends Event {
         return $this->newBalance;
     }
 
-    abstract public function getChangeType(): string;
-
+    public function getChangeType() : string{
+        return $this->changeType;
+    }
 }
