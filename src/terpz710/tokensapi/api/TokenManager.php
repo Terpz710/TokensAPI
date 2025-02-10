@@ -8,7 +8,9 @@ use pocketmine\player\Player;
 
 use terpz710\tokensapi\TokensAPI;
 
-use terpz710\tokensapi\event\TokenBalanceChangeEvent;
+use terpz710\tokensapi\event\AddTokenEvent;
+use terpz710\tokensapi\event\RemoveTokenEvent;
+use terpz710\tokensapi\event\SetTokenEvent;
 
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
@@ -71,42 +73,50 @@ final class TokenManager {
     }
 
     public function addTokens(Player|string $player, int $amount){
-        (new TokenBalanceChangeEvent($player))->call();
         $uuid = $this->resolveUuid($player);
         if ($uuid === '') return;
 
-        $this->tokenCache[$uuid]['balance'] = ($this->tokenCache[$uuid]['balance'] ?? 0) + $amount;
+        $oldBalance = $this->getTokens($player);
+        $newBalance = $oldBalance + $amount;
 
+        (new AddTokenEvent($player, $oldBalance, $newBalance))->call();
+
+        $this->tokenCache[$uuid]['balance'] = $newBalance;
         $this->database->executeChange("tokens.add", ["uuid" => $uuid, "amount" => $amount]);
     }
 
     public function removeTokens(Player|string $player, int $amount){
-        (new TokenBalanceChangeEvent($player))->call();
         $uuid = $this->resolveUuid($player);
         if ($uuid === '') return;
 
-        $this->tokenCache[$uuid]['balance'] = max(0, ($this->tokenCache[$uuid]['balance'] ?? 0) - $amount);
+        $oldBalance = $this->getTokens($player);
+        $newBalance = max(0, $oldBalance - $amount);
 
+        (new RemoveTokenEvent($player, $oldBalance, $newBalance))->call();
+
+        $this->tokenCache[$uuid]['balance'] = $newBalance;
         $this->database->executeChange("tokens.remove", ["uuid" => $uuid, "amount" => $amount]);
     }
 
     public function setTokens(Player|string $player, int $amount){
-        (new TokenBalanceChangeEvent($player))->call();
         $uuid = $this->resolveUuid($player);
         if ($uuid === '') return;
 
-        $this->tokenCache[$uuid]['balance'] = $amount;
+        $oldBalance = $this->getTokens($player);
+        $newBalance = $amount;
 
+        (new SetTokenEvent($player, $oldBalance, $newBalance))->call();
+
+        $this->tokenCache[$uuid]['balance'] = $newBalance;
         $this->database->executeChange("tokens.set", ["uuid" => $uuid, "amount" => $amount]);
     }
 
     public function getTopTokens(callable $callback){
         $this->database->executeSelect("tokens.top", [], function(array $rows) use ($callback) {
-            $this->tokenCache['top'] = $rows;
-            $callback($rows);
+        $this->tokenCache['top'] = $rows;
+        $callback($rows);
         });
     }
-
 
     private function resolveUuid(Player|string $player) : ?string{
         if ($player instanceof Player) {
