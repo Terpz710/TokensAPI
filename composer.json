@@ -1,0 +1,14 @@
+{
+    "name": "terpz710/tokensapi",
+    "type": "project",
+    "license": "GNU General Public License v3.0",
+    "require": {
+        "pocketmine/pocketmine-mp": "^5.0.0-BETA4",
+        "poggit/libasynql": "^4.2.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "TokensAPI\\": "src/TokensAPI"
+        }
+    }
+}
