@@ -10,4 +10,5 @@ projects:
     libs:
       - src: poggit/libasynql/libasynql
         version: ^4.2.3
+    lint: false
 ...
